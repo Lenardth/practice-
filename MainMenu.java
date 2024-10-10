@@ -35,11 +35,11 @@ public class MainMenu extends JFrame {
 
         Color buttonColor = new Color(70, 130, 180);
 
-        RoundedButton bookTaxiButton = createMenuButton("Book a Taxi", buttonColor);
-        RoundedButton nearbyTaxiButton = createMenuButton("See Nearby Taxis", buttonColor);
-        RoundedButton taxiRoutesButton = createMenuButton("View Taxi Routes", buttonColor);
-        RoundedButton taxiScheduleButton = createMenuButton("Taxi Schedule", buttonColor);
-        RoundedButton themeSwitcher = createMenuButton("Switch Theme", new Color(155, 89, 182));
+        RoundedButton bookTaxiButton = createActionButton("Book a Taxi", buttonColor);
+        RoundedButton nearbyTaxiButton = createActionButton("See Nearby Taxis", buttonColor);
+        RoundedButton taxiRoutesButton = createActionButton("View Taxi Routes", buttonColor);
+        RoundedButton taxiScheduleButton = createActionButton("Taxi Schedule", buttonColor);
+        RoundedButton themeSwitcher = createActionButton("Switch Theme", new Color(155, 89, 182));
 
         sidebarPanel.add(bookTaxiButton);
         sidebarPanel.add(nearbyTaxiButton);
@@ -135,15 +135,9 @@ public class MainMenu extends JFrame {
         setVisible(true);
     }
 
-    private RoundedButton createMenuButton(String text, Color color) {
-        RoundedButton button = new RoundedButton(text, color, color.brighter());
-        button.setPreferredSize(new Dimension(120, 30));
-        return button;
-    }
-
     private RoundedButton createActionButton(String text, Color color) {
         RoundedButton button = new RoundedButton(text, color, color.brighter());
-        button.setPreferredSize(new Dimension(120, 30));
+        button.setPreferredSize(new Dimension(120, 50)); // Adjusted button size to match login form
         return button;
     }
 
@@ -217,7 +211,8 @@ public class MainMenu extends JFrame {
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("taxis.ser"))) {
             taxis = (ArrayList<Taxi>) ois.readObject();
         } catch (IOException | ClassNotFoundException e) {
-            JOptionPane.showMessageDialog(this, "Failed to load taxi data.", "Error", JOptionPane.ERROR_MESSAGE);
+            taxis = new ArrayList<>();
+            JOptionPane.showMessageDialog(this, "Failed to load taxi data. Starting with an empty list.", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 

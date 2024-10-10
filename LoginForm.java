@@ -53,7 +53,7 @@ public class LoginForm extends JFrame {
         gbc.gridx = 0;
         gbc.gridy = 1;
         gbc.gridwidth = 1;
-        backgroundPanel.add(emailLabel, gbAc);
+        backgroundPanel.add(emailLabel, gbc);
 
         gbc.gridx = 1;
         gbc.gridy = 1;
@@ -90,6 +90,11 @@ public class LoginForm extends JFrame {
         gbc.gridy = 5;
         signUpButton.addActionListener(e -> openRegistrationForm());
         backgroundPanel.add(signUpButton, gbc);
+
+        RoundedButton aboutButton = new RoundedButton("About", new Color(255, 165, 0), Color.WHITE);
+        gbc.gridy = 6;
+        aboutButton.addActionListener(e -> showAboutInfo());
+        backgroundPanel.add(aboutButton, gbc);
 
         setContentPane(backgroundPanel);
         setVisible(true);
@@ -139,6 +144,10 @@ public class LoginForm extends JFrame {
     private void openRegistrationForm() {
         new RegistrationForm();
         this.dispose();
+    }
+
+    private void showAboutInfo() {
+        JOptionPane.showMessageDialog(this, "Innovative Transport System\nVersion 1.0\nDeveloped by Lenard Hlabangwana", "About", JOptionPane.INFORMATION_MESSAGE);
     }
 
     private HashMap<String, String> loadUsers() {
